@@ -55,3 +55,96 @@ button:hover{
 
 <h1>📚 Rechtschreibtutor</h1>
 
+<p>
+Gib deinen Text ein oder lade ein Foto deines handgeschriebenen Textes hoch.
+</p>
+
+<h2>📝 Text eingeben</h2>
+
+<textarea id="text"
+placeholder="Schreibe oder füge hier deinen Text ein..."></textarea>
+
+<h2>📷 Foto hochladen</h2>
+
+<input type="file" id="bild" accept="image/*">
+
+<br><br>
+
+<img id="vorschau">
+
+<br><br>
+
+<button onclick="pruefen()">
+Text prüfen
+</button>
+
+<div id="antwort">
+Hier erscheint später die Rückmeldung.
+</div>
+
+<script>
+
+document.getElementById("bild").addEventListener("change", function(event){
+
+    const file = event.target.files[0];
+
+    if(file){
+
+        const reader = new FileReader();
+
+        reader.onload = function(e){
+
+            document.getElementById("vorschau").src =
+                e.target.result;
+
+            document.getElementById("vorschau").style.display =
+                "block";
+        }
+
+        reader.readAsDataURL(file);
+    }
+});
+
+function pruefen(){
+
+    const text =
+        document.getElementById("text").value.trim();
+
+    const bild =
+        document.getElementById("bild").files.length;
+
+    if(text === "" && bild === 0){
+
+        document.getElementById("antwort").innerHTML =
+            "⚠️ Bitte einen Text eingeben oder ein Foto hochladen.";
+
+        return;
+    }
+
+    let meldung = "✅ Eingabe erhalten<br><br>";
+
+    if(text !== ""){
+
+        meldung +=
+            "📝 Text erkannt (" +
+            text.split(/\s+/).length +
+            " Wörter).<br>";
+    }
+
+    if(bild > 0){
+
+        meldung +=
+            "📷 Foto hochgeladen.<br>";
+    }
+
+    meldung +=
+        "<br>🤖 Die KI-Korrektur wird im nächsten Schritt eingebaut.";
+
+    document.getElementById("antwort").innerHTML =
+        meldung;
+}
+
+</script>
+
+</body>
+</html>

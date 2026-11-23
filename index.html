@@ -15,7 +15,7 @@ body{
 
 textarea{
     width:100%;
-    height:300px;
+    height:250px;
     font-size:16px;
     padding:10px;
 }
@@ -27,55 +27,31 @@ button{
     padding:12px 20px;
     font-size:16px;
     cursor:pointer;
-    margin-top:10px;
+}
+
+button:hover{
+    background:#0052a3;
 }
 
 #antwort{
     margin-top:20px;
-    padding:20px;
     border:1px solid #ccc;
-    border-radius:5px;
+    padding:15px;
+    border-radius:8px;
+}
+
+#vorschau{
+    margin-top:10px;
+    max-width:100%;
+    border:1px solid #ccc;
+    padding:5px;
+    border-radius:8px;
+    display:none;
 }
 </style>
-
 </head>
+
 <body>
 
 <h1>📚 Rechtschreibtutor</h1>
 
-<p>
-Füge deinen Text ein und klicke auf «Text prüfen».
-</p>
-
-<textarea id="text"></textarea>
-
-<br>
-
-<button onclick="pruefen()">
-Text prüfen
-</button>
-
-<div id="antwort">
-Hier erscheint später die Rückmeldung.
-</div>
-
-<script>
-function pruefen() {
-
-const text = document.getElementById("text").value;
-
-if(text.trim() === ""){
-    document.getElementById("antwort").innerHTML =
-    "Bitte zuerst einen Text eingeben.";
-    return;
-}
-
-document.getElementById("antwort").innerHTML =
-"Die KI-Anbindung folgt im nächsten Schritt.<br><br>Dein Text enthält " +
-text.split(" ").length +
-" Wörter.";
-}
-</script>
-
-</body>
-</html>
